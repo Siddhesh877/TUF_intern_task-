@@ -1,4 +1,5 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
+import axios from 'axios';
 import Editor from '@monaco-editor/react';
 import './ProgrammingForm.css';
 
@@ -10,7 +11,22 @@ const ProgrammingForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(name, language, code, stdin);
+        // console.log(name, language, code, stdin);
+        
+        const data = { name: name, language: language, code: code, input: stdin };
+        useEffect(() => {
+            postData= async (data) =>{
+            axios.post('http://localhost:3001/submit', data)
+            .then((response) => {
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.error('There was an error!', error);
+            });
+            }
+            postData(data);
+        }, []);
+        // console.log(data);
     }
     
     return (
