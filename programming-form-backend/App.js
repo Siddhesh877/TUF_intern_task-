@@ -8,6 +8,8 @@ const cron = require('node-cron');
 const redis = require('redis');
 require('dotenv').config();
 
+
+
 const app = express();
 const port = process.env.PORT||3001;
 table();
@@ -20,6 +22,7 @@ app.get("/healthCheck", (req, res) => {
 });
 // TODO: Add your backend URL here
 const backendUrl=process.env.BACKEND_URL;
+console.log(backendUrl);
 cron.schedule("*/180 * * * * *", async function () {
   console.log("Restarting server");
 
@@ -37,8 +40,23 @@ cron.schedule("*/180 * * * * *", async function () {
     });
 });
 
-//allow anyone to access the api
-app.use(cors());
+const allowedOrigins = ['http://localhost:3000',process.env.FRONTEND_URL];
+console.log(allowedOrigins);
+app.use(cors({
+  origin: function(origin, callback){
+    // allow requests with no origin 
+    // (like mobile apps or curl requests)
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      var msg = 'The CORS policy for this site does not ' +
+                'allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
+
+
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
