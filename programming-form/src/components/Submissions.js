@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
 import './Submissions.css';
-import Editor from '@monaco-editor/react';
 
 const Submissions = () => {
     const [submissions, setSubmissions] = useState([]);
@@ -46,7 +45,7 @@ const Submissions = () => {
                                 {showFullCode[index] && (
                                     <pre>{submission.code}</pre>
                                 )}
-                            </div>
+                            
                             {submission.code.length > 100 && (
                                 <button
                                     className="show-more-btn"
@@ -55,6 +54,7 @@ const Submissions = () => {
                                     {showFullCode[index] ? 'Show Less' : 'Show More'}
                                 </button>
                             )}
+                            </div>
                         </div>
                     </div> 
                 ))}

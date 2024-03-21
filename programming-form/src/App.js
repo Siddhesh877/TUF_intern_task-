@@ -1,7 +1,7 @@
 // import react from 'react';
 import ProgrammingForm from './components/ProgrammingForm';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route,Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route,Routes, Link } from 'react-router-dom';
 import Submissions from './components/Submissions';
 
 
@@ -9,16 +9,16 @@ function App() {
   return (
     <div className="App">
     <header className="App-header">
-      <h3>Submit Your Code</h3>
+      <h3>Code Submissions</h3>
     </header>
     <Router>
       <nav>
         <ul>
           <li>
-            <Link to="/">Form</Link>
+            <Link to="/"><span>Form</span></Link>
           </li>
           <li>
-            <Link to="/submissions">Submissions</Link>
+            <Link to="/submissions"><span>Submissions</span></Link>
           </li>
         </ul>
       </nav>
