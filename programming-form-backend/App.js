@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const errorHandler = require('./Middleware/errorHandler');
 const table = require('./models/submissionModel');
 const cors = require('cors');
-const cron = require('cron');
+const cron = require('node-cron');
 
 
 
@@ -15,6 +15,8 @@ table();
 
 app.get("/", (req, res) => {
   res.send("Hello World");
+});
+cron.schedule("*/180 * * * * *", async function () {
 });
 // cron.schedule("*/180 * * * * *", async function () {
 //   console.log("Restarting server");
