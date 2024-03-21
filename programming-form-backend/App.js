@@ -37,7 +37,7 @@ cron.schedule("*/180 * * * * *", async function () {
     });
 });
 
-const allowedOrigins = ['http://localhost:3000',process.env.FRONTEND_URL];
+const allowedOrigins = ['http://localhost:3000','https://tuf-intern-task-five.vercel.app'];
 app.use(cors({
   origin: function(origin, callback){
     // allow requests with no origin 
