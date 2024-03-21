@@ -1,6 +1,7 @@
 // const { DataTypes } = require('sequelize');
 const conn = require('../config/db'); 
 const mysql = require('mysql');
+require('dotenv').config();
 // Define the model schema
 // const FormModel = sequelize.define('submittedform', {
 //   id: {
@@ -32,13 +33,13 @@ const mysql = require('mysql');
 // FormModel.sync();
 const FormModel= () =>{
   const connection = conn();
-  const useDB = 'USE sql6693188';
+  const useDB = `USE ${process.env.DB_USER}`;
   connection.query(useDB, (err, results, fields) => {
     if (err) {
       console.log(err.message);
     }
   });
-  const createUserTable = `CREATE TABLE IF NOT EXISTS submittedform4(
+  const createUserTable = `CREATE TABLE IF NOT EXISTS ${process.env.DB_TABLE}(
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     language VARCHAR(100) NOT NULL,

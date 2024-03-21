@@ -1,4 +1,5 @@
 const axios = require('axios');
+require('dotenv').config();
 
 
  const getResToken = async (sourceCode, languageId, stdin) => {
@@ -6,7 +7,7 @@ const axios = require('axios');
   const convertedSourceCode = Buffer.from(sourceCode).toString('base64');
   const options = {
     method: 'POST',
-    url: 'https://judge0-ce.p.rapidapi.com/submissions',
+    url: process.env.JUDGE_URL + '/submissions',
     params: {
       base64_encoded: 'true',
       fields: '*'
@@ -14,9 +15,8 @@ const axios = require('axios');
     headers: {
       'content-type': 'application/json',
       'Content-Type': 'application/json',
-      //TODO: Shift this to .env file
-      'X-RapidAPI-Key': 'f40520f1bfmsh51f1cedbc986419p16d9b1jsn55004c8d4c0f',
-      'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com'
+      'X-RapidAPI-Key': process.env.JUDGE_API_KEY,
+      'X-RapidAPI-Host': process.env.JUDGE_URL
     },
     data: {
       language_id: languageId,
@@ -38,14 +38,14 @@ const axios = require('axios');
   try {
   const options = {
     method: 'GET',
-    url: `https://judge0-ce.p.rapidapi.com/submissions/${token}`,
+    url: process.env.JUDGE_URL + `/submissions/${token}`,
     params: {
       base64_encoded: 'true',
       fields: '*'
     },
     headers: {
-      'X-RapidAPI-Key': 'f40520f1bfmsh51f1cedbc986419p16d9b1jsn55004c8d4c0f',
-      'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com'
+      'X-RapidAPI-Key': process.env.JUDGE_API_KEY,
+      'X-RapidAPI-Host': process.env.JUDGE_URL
     }
   };
 

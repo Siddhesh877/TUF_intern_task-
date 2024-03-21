@@ -6,8 +6,7 @@ const table = require('./models/submissionModel');
 const cors = require('cors');
 const cron = require('node-cron');
 const redis = require('redis');
-
-
+require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT||3001;
@@ -20,7 +19,7 @@ app.get("/healthCheck", (req, res) => {
   res.send("Hello World");
 });
 // TODO: Add your backend URL here
-const backendUrl="https://tuf-intern-task-1pws.onrender.com"
+const backendUrl=process.env.BACKEND_URL;
 cron.schedule("*/180 * * * * *", async function () {
   console.log("Restarting server");
 
@@ -38,7 +37,7 @@ cron.schedule("*/180 * * * * *", async function () {
     });
 });
 
-const allowedOrigins = ['http://localhost:3000','https://tuf-intern-task-five.vercel.app'];
+const allowedOrigins = ['http://localhost:3000',process.env.FRONTEND_URL];
 app.use(cors({
   origin: function(origin, callback){
     // allow requests with no origin 
@@ -62,7 +61,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 let redisClient;
 (async () => {
   redisClient = redis.createClient({
-    url: "rediss://red-cnu2ipu3e1ms738ah7qg:b2YGWflr3hLVPm6DmdwsUwWTUiX98zej@oregon-redis.render.com:6379",
+    url: process.env.REDIS_URL,
   }); 
 
   redisClient.on("error", (error) => {

@@ -6,7 +6,7 @@ const Submissions = () => {
     const [submissions, setSubmissions] = useState([]);
     const [showFullCode, setShowFullCode] = useState({});
     const getSubmissions = async () => {
-        axios.get('https://tuf-intern-task-1pws.onrender.com/api/form/getforms')
+        axios.get('https://tuf-intern-task-1pws.onrender.co/api/form/getforms')
         .then((response) => {
             setSubmissions(response.data);
             console.log(response.data);
