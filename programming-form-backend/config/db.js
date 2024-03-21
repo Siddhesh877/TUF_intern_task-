@@ -18,7 +18,9 @@ conn.connect((err) => {
   }
   console.log('Connected to the database as id ' + conn.threadId);
 })
-
+process.on('exit', () => {
+  conn.end();
+});
   return conn;
 };
 module.exports = connectDB;

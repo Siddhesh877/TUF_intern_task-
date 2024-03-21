@@ -9,8 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.3",
     "express-async-handler": "^1.2.0",
+    "moment": "^2.30.1",
+    "moment-timezone": "^0.5.45",
     "mysql": "^2.18.1",
     "node": "^21.7.1",
     "sequelize": "^6.37.1"

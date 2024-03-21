@@ -38,13 +38,13 @@ const FormModel= () =>{
       console.log(err.message);
     }
   });
-  const createUserTable = `CREATE TABLE IF NOT EXISTS submittedform(
+  const createUserTable = `CREATE TABLE IF NOT EXISTS submittedform3(
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     language VARCHAR(100) NOT NULL,
     input TEXT NOT NULL,
     code TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP NOT NULL 
   
   )`;
   connection.query(createUserTable, (err, results, fields) => {

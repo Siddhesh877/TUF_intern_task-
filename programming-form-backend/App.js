@@ -3,12 +3,18 @@ const bodyParser = require('body-parser');
 // const connectDB = require('./config/db');
 const errorHandler = require('./Middleware/errorHandler');
 const table = require('./models/submissionModel');
+const cors = require('cors');
 
 
 const app = express();
 const port = 3001;
 // connectDB();
 table();
+
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
+
 
 // Middleware
 app.use(bodyParser.json());

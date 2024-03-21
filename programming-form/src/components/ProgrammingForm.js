@@ -8,25 +8,24 @@ const ProgrammingForm = () => {
     const [language, setLanguage] = useState('javascript');
     const [code, setCode] = useState('');
     const [stdin, setStdin] = useState('');
-
+    const data = { name: name, language: language, code: code, input: stdin };
+    const PostData= async () =>{
+        axios.post('http://localhost:3001/api/form/submit', data)
+        .then((response) => {
+            console.log(response.data);
+        })
+        .catch((error) => {
+            console.error('There was an error!', error);
+        });
+    }
+    // useEffect(() => {
+    //     PostData();
+    // });
     const handleSubmit = (e) => {
         e.preventDefault();
         // console.log(name, language, code, stdin);
-        
-        const data = { name: name, language: language, code: code, input: stdin };
-        useEffect(() => {
-            postData= async (data) =>{
-            axios.post('http://localhost:3001/submit', data)
-            .then((response) => {
-                console.log(response.data);
-            })
-            .catch((error) => {
-                console.error('There was an error!', error);
-            });
-            }
-            postData(data);
-        }, []);
-        // console.log(data);
+        PostData();
+         // console.log(data);
     }
     
     return (
