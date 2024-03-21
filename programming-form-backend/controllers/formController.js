@@ -85,7 +85,7 @@ const cacheMiddleware = async (req, res, next) => {
 const getForms = async (req, res) => {
 
     try {
-        const sql = `SELECT name, language, input, code, SubmissionResponse, created_at FROM ${process.env.DB_TABLE}  `;
+        const sql = `SELECT name, language, input, code, SubmissionResponse, created_at FROM ${process.env.DB_TABLE} `;
         conn.query(sql, async (err, result) => {
             if (err) {
                 res.status(500);

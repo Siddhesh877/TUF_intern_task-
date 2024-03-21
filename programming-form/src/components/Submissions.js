@@ -8,8 +8,17 @@ const Submissions = () => {
     const getSubmissions = async () => {
         axios.get('https://tuf-intern-task-1pws.onrender.co/api/form/getforms')
         .then((response) => {
-            setSubmissions(response.data);
-            console.log(response.data);
+            const submissionsData = response.data.map((submission) => {
+                const parsedSubmissionResponse = JSON.parse(submission.SubmissionResponse);
+                const decodedStdout = atob(parsedSubmissionResponse.stdout);
+                return {
+                    ...submission,
+                    SubmissionResponse: parsedSubmissionResponse,
+                    decodedStdout,
+                };
+            });
+            setSubmissions(submissionsData);
+            // console.log(submissionsData);
         })
         .catch((error) => {
             console.error('There was an error!', error);
@@ -23,6 +32,13 @@ const Submissions = () => {
         setShowFullCode((prevState) => ({
             ...prevState,
             [index]: !prevState[index],
+        }));
+    };
+
+    const handleOutputChange = (index, value) => {
+            setOutput((prevState) => ({
+                ...prevState,
+                [index]: value,
         }));
     };
     return (
@@ -45,6 +61,7 @@ const Submissions = () => {
                                 {showFullCode[index] && (
                                     <pre>{submission.code}</pre>
                                 )}
+                                
                             
                             {submission.code.length > 100 && (
                                 <button
@@ -54,6 +71,15 @@ const Submissions = () => {
                                     {showFullCode[index] ? 'Show Less' : 'Show More'}
                                 </button>
                             )}
+                            </div>
+                            <div className="submission-output">
+                            <p><strong>Output:</strong></p>
+                            <textarea
+                                value={output[index] || submission.decodedStdout || ''}
+                                onChange={(e) => handleOutputChange(index, e.target.value)}
+                                rows={4}
+                                placeholder="Enter output here..."
+                            />
                             </div>
                         </div>
                     </div> 

@@ -38,6 +38,13 @@
   background-color: #0056b3;
 }
 
+.submission-output textarea {
+  width: 100%;
+  resize: vertical;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
 
 button {
   margin-left: 8px;
