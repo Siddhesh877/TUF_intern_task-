@@ -11,11 +11,19 @@ const Submissions = () => {
         .then((response) => {
             const submissionsData = response.data.map((submission) => {
                 const parsedSubmissionResponse = JSON.parse(submission.SubmissionResponse);
-                const decodedStdout = atob(parsedSubmissionResponse.stdout);
+                let decodedStdout='';
+                if(parsedSubmissionResponse.stdout === null) {
+                    decodedStdout = parsedSubmissionResponse.stderr;
+                }
+                else{
+                    decodedStdout = atob(parsedSubmissionResponse.stdout);
+                }
+                const description = parsedSubmissionResponse.status.description;
                 return {
                     ...submission,
                     SubmissionResponse: parsedSubmissionResponse,
                     decodedStdout,
+                    description,
                 };
             });
             setSubmissions(submissionsData);
@@ -76,7 +84,7 @@ const Submissions = () => {
                             <div className="submission-output">
                             <p><strong>Output:</strong></p>
                             <textarea
-                                value={output[index] || submission.decodedStdout || ''}
+                                value={output[index] || submission.decodedStdout || submission.description ||''}
                                 onChange={(e) => handleOutputChange(index, e.target.value)}
                                 rows={4}
                                 
