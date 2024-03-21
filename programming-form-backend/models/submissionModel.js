@@ -32,19 +32,21 @@ const mysql = require('mysql');
 // FormModel.sync();
 const FormModel= () =>{
   const connection = conn();
-  const useDB = 'USE formSubmission';
+  const useDB = 'USE sql6693188';
   connection.query(useDB, (err, results, fields) => {
     if (err) {
       console.log(err.message);
     }
   });
-  const createUserTable = `CREATE TABLE IF NOT EXISTS submittedform3(
+  const createUserTable = `CREATE TABLE IF NOT EXISTS submittedform4(
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     language VARCHAR(100) NOT NULL,
     input TEXT NOT NULL,
     code TEXT NOT NULL,
-    created_at TIMESTAMP NOT NULL 
+    created_at TIMESTAMP NOT NULL,
+    SubmissionToken TEXT,
+    SubmissionResponse TEXT
   
   )`;
   connection.query(createUserTable, (err, results, fields) => {
