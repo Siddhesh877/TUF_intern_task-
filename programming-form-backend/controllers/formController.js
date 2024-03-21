@@ -7,15 +7,14 @@ const redisClient = require('../App');
 const express = require('express');
 const { get } = require('http');
 const app = express();
-// import getSubmissionResponse from '../services/judge0/index';
-// import getResToken from '../services/judge0/index';
+
 const getSubmissionResponse = require('../services/judge0/index').getSubmissionResponse;
 const getResToken = require('../services/judge0/index').getResToken;
 const submitForm = async (req, res) => {
     try{
     const { name, language, input, code } = req.body;
     const langcodemap={
-        "c_pp":52,
+        "c_cpp":52,
         "javascript":93,
         "java":71,
         "python":92

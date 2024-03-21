@@ -5,6 +5,7 @@ import './Submissions.css';
 const Submissions = () => {
     const [submissions, setSubmissions] = useState([]);
     const [showFullCode, setShowFullCode] = useState({});
+    const [output, setOutput] = useState({});
     const getSubmissions = async () => {
         axios.get('https://tuf-intern-task-1pws.onrender.co/api/form/getforms')
         .then((response) => {
@@ -78,7 +79,7 @@ const Submissions = () => {
                                 value={output[index] || submission.decodedStdout || ''}
                                 onChange={(e) => handleOutputChange(index, e.target.value)}
                                 rows={4}
-                                placeholder="Enter output here..."
+                                
                             />
                             </div>
                         </div>

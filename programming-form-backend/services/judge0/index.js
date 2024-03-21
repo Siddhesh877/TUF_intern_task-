@@ -7,7 +7,7 @@ require('dotenv').config();
   const convertedSourceCode = Buffer.from(sourceCode).toString('base64');
   const options = {
     method: 'POST',
-    url: process.env.JUDGE_URL + '/submissions',
+    url: 'https://judge0-ce.p.rapidapi.com/submissions',
     params: {
       base64_encoded: 'true',
       fields: '*'
@@ -15,8 +15,8 @@ require('dotenv').config();
     headers: {
       'content-type': 'application/json',
       'Content-Type': 'application/json',
-      'X-RapidAPI-Key': process.env.JUDGE_API_KEY,
-      'X-RapidAPI-Host': process.env.JUDGE_URL
+      'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,
+      'X-RapidAPI-Host': process.env.RAPIDAPI_HOST
     },
     data: {
       language_id: languageId,
@@ -38,14 +38,14 @@ require('dotenv').config();
   try {
   const options = {
     method: 'GET',
-    url: process.env.JUDGE_URL + `/submissions/${token}`,
+    url: `https://judge0-ce.p.rapidapi.com/submissions/${token}`,
     params: {
       base64_encoded: 'true',
       fields: '*'
     },
     headers: {
-      'X-RapidAPI-Key': process.env.JUDGE_API_KEY,
-      'X-RapidAPI-Host': process.env.JUDGE_URL
+      'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,
+      'X-RapidAPI-Host': process.env.RAPIDAPI_HOST
     }
   };
 
