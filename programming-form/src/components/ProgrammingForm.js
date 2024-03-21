@@ -10,7 +10,7 @@ const ProgrammingForm = () => {
     const [stdin, setStdin] = useState('');
     const data = { name: name, language: language, code: code, input: stdin };
     const PostData= async () =>{
-        axios.post('http://localhost:3001/api/form/submit', data)
+        axios.post('https://tuf-intern-task-1pws.onrender.com/api/form/submit', data)
         .then((response) => {
             console.log(response.data);
         })
