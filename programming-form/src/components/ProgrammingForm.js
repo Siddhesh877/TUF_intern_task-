@@ -13,18 +13,22 @@ const ProgrammingForm = () => {
         axios.post('https://tuf-intern-task-1pws.onrender.com/api/form/submit', data)
         .then((response) => {
             console.log(response.data);
+            alert('Form submitted successfully');
+            setCode('');
+            setName('');
+            setLanguage('javascript');
+            setStdin('');
         })
         .catch((error) => {
             console.error('There was an error!', error);
         });
     }
-    // useEffect(() => {
-    //     PostData();
-    // });
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(name, language, code, stdin);
+
         PostData();
+        // window.location.reload();
          // console.log(data);
     }
     
